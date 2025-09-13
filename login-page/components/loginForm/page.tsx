@@ -1,8 +1,11 @@
 "use client"
+import { useState } from "react"
+import { IranPhoneInput } from "../iranPhoneNumberInput/page"
 import { Button } from "../ui/button"
-import { Input } from "../ui/input"
+
 
 export default function LoginForm (){
+    const [phone , setPhone] = useState("")
     return (
          <div className="w-full max-w-md bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl p-8 animate-fadeIn">
         <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">
@@ -18,13 +21,7 @@ export default function LoginForm (){
         <label className="block text-sm font-medium text-gray-700 mb-1">
             Phone Number
         </label>
-            <Input
-                className=""
-                id="password"
-                name="password"
-                type="number"
-                placeholder="Pleace Add your Phone Number"
-            />
+           <IranPhoneInput value={phone} onChange={setPhone} />
       </div>
         <Button
           className="text-white w-full "
