@@ -4,7 +4,7 @@ import { Input } from "../ui/input";
 
 interface IranPhoneInputProps {
   value: string;
-  onChange: (value: string) => void; 
+  onChange: (value: string) => void;
   placeholder?: string;
   error?: string;
 }
@@ -24,7 +24,7 @@ export const IranPhoneInput: React.FC<IranPhoneInputProps> = ({
     onChange(normalized);
   };
 
-  const showError = touched && !isValidIranPhone(value);
+  const showError = touched && value && !isValidIranPhone(value) && !error;
 
   return (
     <div className="flex flex-col gap-4 ">
@@ -35,14 +35,10 @@ export const IranPhoneInput: React.FC<IranPhoneInputProps> = ({
         value={value}
         onChange={handleChange}
         onBlur={() => setTouched(true)}
-        style={{
-          border: showError ? "1px solid red" : "1px solid #ccc",
-          borderRadius: 4,
-          padding: "8px 12px",
-        }}
+        className={`${showError || error ? "border border-red-300" : "border-[#ccc]" } runded-md p-3 `}
       />
-      {showError || error ? (
-        <span style={{ color: "red", fontSize: 12 }}>
+      {(showError || error) ? (
+        <span className="text-red-500">
           {error || "Phone Number not suitable (exsample: 09123456789, +989123456789, 00989123456789)"}
         </span>
       ) : null}
