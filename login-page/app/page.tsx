@@ -1,4 +1,4 @@
-import LoginForm from "@/components/loginForm/page";
+import LoginForm from "@/app/components/loginForm/page";
 
 export default function Home() {
   return (
