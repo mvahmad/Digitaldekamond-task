@@ -3,13 +3,16 @@ import { useState } from "react"
 import { IranPhoneInput } from "../iranPhoneNumberInput/page"
 import { Button } from "../ui/button"
 import { Label } from "../ui/label"
-import { isValidIranPhone } from "@/lib/utils"; // Make sure you import this
+import { isValidIranPhone } from "@/lib/utils"; 
+import { useRouter } from "next/navigation"
+
 
 export default function LoginForm (){
     const [phone , setPhone] = useState("")
     const [phoneError, setPhoneError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const [apiError, setApiError] = useState<string | null>(null);
+    const router = useRouter()
 
     const handlePhoneChange = (value: string) => {
       setPhone(value);
@@ -34,7 +37,8 @@ export default function LoginForm (){
         }
         const data = await res.json();
         localStorage.setItem("Phone Number", phone);
-        localStorage.setItem("userData", JSON.stringify(data, null, 2));
+        localStorage.setItem("userData", JSON.stringify([data], null, 2));
+        router.push('/dashboard')
       } catch (error: any) {
         setApiError(error.message);
       } finally {
