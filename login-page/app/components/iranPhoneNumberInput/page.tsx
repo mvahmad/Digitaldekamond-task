@@ -1,4 +1,4 @@
-import { isValidIranPhone, normalizeIranPhone } from "@/lib/utils";
+import { isValidIranPhone, normalizeIranPhone } from "@/app/lib/utils";
 import React, { useState } from "react";
 import { Input } from "../ui/input";
 
