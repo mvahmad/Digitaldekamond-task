@@ -11,7 +11,7 @@ interface IranPhoneInputProps {
 }
 
 
-export const IranPhoneInput: React.FC<IranPhoneInputProps> = ({
+const IranPhoneInput: React.FC<IranPhoneInputProps> = ({
   value,
   onChange,
   placeholder = "Phone Number",
@@ -46,3 +46,4 @@ export const IranPhoneInput: React.FC<IranPhoneInputProps> = ({
     </div>
   );
 };
+export default IranPhoneInput;
