@@ -44,23 +44,7 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col items-start  p-8 gap-4">
         <div className="font-bold text-xl">Welcom {user.name.title} {user.name.first} {user.name.last}</div>
-      <div className="flex items-center gap-4">
-        <img src={user.picture.large} alt="avatar" className="w-24 h-24 rounded-full" />
-        <div>
-          <div className="text-gray-500">{user.email}</div>
-          <div className="text-gray-500">{user.phone}</div>
-          <div className="text-gray-500">{user.location.city}, {user.location.state}, {user.location.country}</div>
-        </div>
-      </div>
-      <div>
-        <span className="font-bold">Username:</span> {user.login.username}
-      </div>
-      <div>
-        <span className="font-bold">Age:</span> {user.dob.age}
-      </div>
-      <div>
-        <span className="font-bold">Nationality:</span> {user.nat}
-      </div>
+        {/*  */}
       <Button onClick={handelLogOut} >Log Out</Button>
     </div>
   );
