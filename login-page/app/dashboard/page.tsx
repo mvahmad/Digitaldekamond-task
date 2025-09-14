@@ -2,9 +2,9 @@
 import { Button } from "@/components/ui/button";
 import { redirect, useRouter } from 'next/navigation'
 import { useState, useEffect } from "react";
-
+import { User } from "./type";
 export default function Dashboard() {
-    const [user, setUser] = useState<any | null>(null);
+    const [user, setUser] = useState<User | null>(null);
     const router = useRouter();
 
     useEffect(() => {
