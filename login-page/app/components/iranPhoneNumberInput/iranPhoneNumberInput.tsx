@@ -6,7 +6,7 @@ import { Input } from "../ui/input";
 interface IranPhoneInputProps {
   value: string;
   onChange: (value: string) => void;
-  placeholder?: string;
+  // 
   error?: string;
 }
 
@@ -14,7 +14,7 @@ interface IranPhoneInputProps {
 const IranPhoneInput: React.FC<IranPhoneInputProps> = ({
   value,
   onChange,
-  placeholder = "Phone Number",
+  // 
   error,
 }) => {
   const [touched, setTouched] = useState(false);
@@ -32,7 +32,7 @@ const IranPhoneInput: React.FC<IranPhoneInputProps> = ({
       <Input
         type="tel"
         inputMode="numeric"
-        placeholder={placeholder}
+        placeholder="Phone Number"
         value={value}
         onChange={handleChange}
         onBlur={() => setTouched(true)}
