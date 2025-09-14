@@ -2,10 +2,14 @@
 import { useState } from "react"
 import { IranPhoneInput } from "../iranPhoneNumberInput/page"
 import { Button } from "../ui/button"
+import { Label } from "../ui/label"
 
 
 export default function LoginForm (){
     const [phone , setPhone] = useState("")
+    const handleSubmit = ()=>{
+         localStorage.setItem("Phone Number" ,phone )
+    }   
     return (
          <div className="w-full max-w-md bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl p-8 animate-fadeIn">
         <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">
@@ -14,13 +18,13 @@ export default function LoginForm (){
                 <p className="text-sm text-gray-600 mb-6 text-center">
                     
                 </p>
-      <form onSubmit={()=>{}} className="space-y-5">
+      <form onSubmit={handleSubmit} className="space-y-5">
         
       <div className="flex flex-col gap-2">
           
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <Label>
             Phone Number
-        </label>
+        </Label>
            <IranPhoneInput value={phone} onChange={setPhone} />
       </div>
         <Button
