@@ -6,6 +6,11 @@ import { Label } from "../ui/label"
 import { isValidIranPhone } from "@/lib/utils"; 
 import { useRouter } from "next/navigation"
 
+interface ApiErrorType {
+  message: string;
+  statusCode?: number;
+}
+
 
 export default function LoginForm (){
     const [phone , setPhone] = useState("")
@@ -23,28 +28,44 @@ export default function LoginForm (){
       }
     };
 
-    const handleSubmit = async (e: React.FormEvent)=>{
-      e.preventDefault();
-      setApiError(null);
-      setLoading(true);
-      try {
-        const res = await fetch("https://randomuser.me/api/?results=1&nat=us", {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        });
-        if (!res.ok) {
-          throw new Error("Failed to login");
-        }
-        const data = await res.json();
-        localStorage.setItem("Phone Number", phone);
-        localStorage.setItem("userData", JSON.stringify([data], null, 2));
-        router.push('/dashboard')
-      } catch (error: any) {
-        setApiError(error.message);
-      } finally {
-        setLoading(false);
-      }
+    const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setApiError(null);
+  setLoading(true);
+
+  try {
+    const res = await fetch("https://randomuser.me/api/?results=1&nat=us", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!res.ok) {
+      const error: ApiErrorType = {
+        message: "Failed to login",
+        statusCode: res.status,
+      };
+      throw error;
     }
+
+    const data = await res.json();
+    localStorage.setItem("Phone Number", phone);
+    localStorage.setItem("userData", JSON.stringify([data], null, 2));
+    router.push("/dashboard");
+  } catch (error) {
+    if (typeof error === "object" && error !== null && "message" in error) {
+      const typedError = error as ApiErrorType;
+      setApiError(
+        typedError.statusCode
+          ? `Error ${typedError.statusCode}: ${typedError.message}`
+          : typedError.message
+      );
+    } else {
+      setApiError("An unknown error occurred");
+    }
+  } finally {
+    setLoading(false);
+  }
+};
     return (
       <div className="w-full max-w-md bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl p-8 ">
         <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">
