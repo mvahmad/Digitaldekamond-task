@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build:devenv": "set NODE_ENV=development && next build"
+    "build:devenv": "set NODE_ENV=development && next build",
     "start": "next start",
     "lint": "eslint"
   },
